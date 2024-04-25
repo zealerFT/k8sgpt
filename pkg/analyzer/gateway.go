@@ -54,7 +54,7 @@ func (GatewayAnalyzer) Analyze(a common.Analyzer) ([]common.Result, error) {
 		gtwName := gtw.GetName()
 		gtwNamespace := gtw.GetNamespace()
 		// Check if gatewayclass exists
-		err := client.Get(a.Context, ctrl.ObjectKey{Namespace: gtwNamespace, Name: string(gtw.Spec.GatewayClassName)}, gc, &ctrl.GetOptions{})
+		err := client.Get(a.Context, ctrl.ObjectKey{Namespace: gtwNamespace, Name: string(gtw.Spec.GatewayClassName)}, gc)
 		if errors.IsNotFound(err) {
 			failures = append(failures, common.Failure{
 				Text: fmt.Sprintf(
