@@ -155,7 +155,7 @@ func (HTTPRouteAnalyzer) Analyze(a common.Analyzer) ([]common.Result, error) {
 		// Check if the Backends are valid services and ports are matching with services Ports
 		for _, rule := range route.Spec.Rules {
 			for _, backend := range rule.BackendRefs {
-				err := client.Get(a.Context, ctrl.ObjectKey{Namespace: route.Namespace, Name: string(backend.Name)}, service, &ctrl.GetOptions{})
+				err := client.Get(a.Context, ctrl.ObjectKey{Namespace: route.Namespace, Name: string(backend.Name)}, service)
 				if errors.IsNotFound(err) {
 					failures = append(failures, common.Failure{
 						Text: fmt.Sprintf(
